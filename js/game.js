@@ -16,9 +16,21 @@ function gameLoop(){
 		height: 18
 		});
 
-	//context.drawImage(img, 14, 18);
+	window.addEventListener("keypress", keyboardHandler, false);
 	sara.draw();
 };
+
+function keyboardHandler(e){
+	if(e.keyCode == 119){
+		console.log("Up");
+	} else if(e.keyCode == 97){
+		console.log("Left");
+	}else if(e.keyCode == 115){
+		console.log("Down");
+	}else if(e.keyCode == 100){
+		console.log("Right");
+	}
+}
 
 function sprite(params){
 	var sprite = {};
