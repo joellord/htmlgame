@@ -1,6 +1,10 @@
 function init(){
+	//var imageResources = []
+
 	imageLoader("img/sara-simple.png", gameLoop)
 };
+
+// Need to set up a proper game loop
 
 function gameLoop(){
 	canvas = document.getElementById("game");
@@ -9,6 +13,8 @@ function gameLoop(){
 	canvas.width = 500;
 	canvas.height = 500;
 
+	var isMoving = false;
+
 	var sara = sprite({
 		context: context,
 		image: img,
@@ -16,12 +22,14 @@ function gameLoop(){
 		height: 18
 		});
 
-	window.addEventListener("keypress", keyboardHandler, false);
+	window.addEventListener("keypress", keyboardHandler);
+	console.log(isMoving);
 	sara.draw();
 };
 
 function keyboardHandler(e){
 	if(e.keyCode == 119){
+		isMoving = true;
 		console.log("Up");
 	} else if(e.keyCode == 97){
 		console.log("Left");
@@ -31,6 +39,8 @@ function keyboardHandler(e){
 		console.log("Right");
 	}
 }
+
+// Should make this a super class
 
 function sprite(params){
 	var sprite = {};
@@ -55,6 +65,7 @@ function sprite(params){
 	return sprite;
 }
 
+// ImageLoader should load all needed image files.
 function imageLoader(src, callback){
 	img = new Image();
 	img.src = src;
