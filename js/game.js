@@ -1,7 +1,7 @@
 function init(){
-	//var imageResources = []
+	var imageResources = ["img/sara-simple.png"]
 
-	imageLoader("img/sara-simple.png", gameLoop)
+	imageLoader(imageResources, gameLoop)
 };
 
 // Need to set up a proper game loop
@@ -67,8 +67,13 @@ function sprite(params){
 
 // ImageLoader should load all needed image files.
 function imageLoader(src, callback){
-	img = new Image();
-	img.src = src;
+	var uploadedImages;
+
+	for(img = 0; img < imageUploader.length; img++){
+		var sheet = new Image();
+		sheet.src = src[img];
+	}
+
 	img.onload = function(){
 		callback(img);
 	}
