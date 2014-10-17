@@ -13,6 +13,20 @@ function gameLoop(){
 	canvas.width = 500;
 	canvas.height = 500;
 
+	var count = 0;
+
+	while(true){
+		/* processInput();
+		   update();
+		   render(); */
+
+		window.addEventListener("keypress", keyboardHandler);
+
+		if(count == 100){
+			break;
+		}
+	}
+
 	/* var sara = sprite({
 		context: context,
 		image: img,
@@ -20,14 +34,13 @@ function gameLoop(){
 		height: 18
 		}); */
 
-	//window.addEventListener("keypress", keyboardHandler);
+	//
 	//console.log(isMoving);
 	//sara.draw();
 };
 
 function keyboardHandler(e){
 	if(e.keyCode == 119){
-		isMoving = true;
 		console.log("Up");
 	} else if(e.keyCode == 97){
 		console.log("Left");
