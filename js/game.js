@@ -13,18 +13,16 @@ function gameLoop(){
 	canvas.width = 500;
 	canvas.height = 500;
 
-	var isMoving = false;
-
-	var sara = sprite({
+	/* var sara = sprite({
 		context: context,
 		image: img,
 		width: 14,
 		height: 18
-		});
+		}); */
 
-	window.addEventListener("keypress", keyboardHandler);
-	console.log(isMoving);
-	sara.draw();
+	//window.addEventListener("keypress", keyboardHandler);
+	//console.log(isMoving);
+	//sara.draw();
 };
 
 function keyboardHandler(e){
@@ -67,14 +65,19 @@ function sprite(params){
 
 // ImageLoader should load all needed image files.
 function imageLoader(src, callback){
-	var uploadedImages;
+	// Attempt to batch load images -- come back to this
+	/*var uploadedImages;
 
 	for(img = 0; img < imageUploader.length; img++){
 		var sheet = new Image();
 		sheet.src = src[img];
-	}
+	} */
 
-	img.onload = function(){
+	var img = new Image();
+	img.src = src;
+
+	img.onload = function(){ 
 		callback(img);
 	}
+
 };
