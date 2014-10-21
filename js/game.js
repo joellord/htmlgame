@@ -15,16 +15,25 @@ function gameLoop(){
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
+	var textX = 10;
+	var textY = 10;
+
 	function processInput(){
 		//stub
 	}
 
 	function update(){
-
+		textX += 1;
+		textY += 1;
 	}
 
 	function render(){
+		context.fillStyle = "#FF0000";
+		context.fillRect(0, 0, 500, 500);
 
+		context.fillStyle = 'white';
+		context.font = "30px sans";
+		context.fillText("Hello World", textX, textY);
 	}
 
 	function nextFrame(){
