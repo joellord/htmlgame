@@ -21,7 +21,7 @@ function gameLoop(){
 		   render(); */
 
 		window.addEventListener("keypress", keyboardHandler);
-		
+
 		if(count == 100){
 			break;
 		}
