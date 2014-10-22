@@ -24,17 +24,15 @@ function gameLoop(){
 	}
 
 	function keyboardHandler(e){
-		// if(e.keyCode == 119){
-		// 	console.log("Up");
-		// } else if(e.keyCode == 97){
-		// 	console.log("Left");
-		// }else if(e.keyCode == 115){
-		// 	console.log("Down");
-		// }else if(e.keyCode == 100){
-		// 	console.log("Right");
-		// }
-
-		console.log(e.keyCode);
+		if(e.keyCode || e.which == 119){
+			console.log("Up");
+		} else if(e.keyCode || e.which == 97){
+			console.log("Left");
+		}else if(e.keyCode || e.which == 115){
+			console.log("Down");
+		}else if(e.keyCode || e.which == 100){
+			console.log("Right");
+		}
 	}
 
 	function update(){
