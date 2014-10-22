@@ -15,16 +15,30 @@ function gameLoop(){
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
-	var textX = 10;
-	var textY = 10;
+	var textX = 1;
+	var textY = 30;
 
-	function processInput(){
+	function processInput(lastUpdated){
 		//stub
+		window.addEventListener("keypress", keyboardHandler);
+	}
+
+	function keyboardHandler(e){
+		// if(e.keyCode == 119){
+		// 	console.log("Up");
+		// } else if(e.keyCode == 97){
+		// 	console.log("Left");
+		// }else if(e.keyCode == 115){
+		// 	console.log("Down");
+		// }else if(e.keyCode == 100){
+		// 	console.log("Right");
+		// }
+
+		console.log(e.keyCode);
 	}
 
 	function update(){
-		textX += 1;
-		textY += 1;
+		//stub
 	}
 
 	function render(){
@@ -38,7 +52,7 @@ function gameLoop(){
 
 	function nextFrame(){
 		var currentTime = new Date().getTime();
-		console.log(currentTime);
+		//console.log(currentTime);
 
 		processInput(currentTime - lastUpdate);
 		update(currentTime - lastUpdate);
