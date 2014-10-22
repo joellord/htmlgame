@@ -25,12 +25,16 @@ function gameLoop(){
 
 	function keyboardHandler(e){
 		if(e.keyCode || e.which == 119){
+			textY -= 10;
 			console.log("Up");
 		} else if(e.keyCode || e.which == 97){
+			textX -= 10;
 			console.log("Left");
 		}else if(e.keyCode || e.which == 115){
+			textY += 10;
 			console.log("Down");
 		}else if(e.keyCode || e.which == 100){
+			textX += 10;
 			console.log("Right");
 		}
 	}
