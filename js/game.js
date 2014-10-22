@@ -1,11 +1,9 @@
 function init(){
-	var imageResources = ["img/sara-simple.png"]
-
-	imageLoader(imageResources, gameLoop)
+	imageLoader("img/sara-simple.png", gameLoop)
 };
 
 
-function gameLoop(){
+function gameLoop(img){
 	canvas = document.getElementById("game");
 	context = canvas.getContext("2d");
 
@@ -19,21 +17,26 @@ function gameLoop(){
 	var textY = 30;
 
 	function processInput(lastUpdated){
-		//stub
 		window.addEventListener("keypress", keyboardHandler);
 	}
 
 	function keyboardHandler(e){
+		// The 'W' Key
 		if(e.keyCode || e.which == 119){
 			textY -= 10;
-			console.log("Up");
-		} else if(e.keyCode || e.which == 97){
+		} 
+		// The 'A' Key
+		else if(e.keyCode || e.which == 97){
 			textX -= 10;
 			console.log("Left");
-		}else if(e.keyCode || e.which == 115){
+		}
+		// The 'S' Key
+		else if(e.keyCode || e.which == 115){
 			textY += 10;
 			console.log("Down");
-		}else if(e.keyCode || e.which == 100){
+		}
+		// The 'D' Key
+		else if(e.keyCode || e.which == 100){
 			textX += 10;
 			console.log("Right");
 		}
@@ -44,12 +47,44 @@ function gameLoop(){
 	}
 
 	function render(){
-		context.fillStyle = "#FF0000";
+		context.fillStyle = "#000000";
 		context.fillRect(0, 0, 500, 500);
 
-		context.fillStyle = 'white';
-		context.font = "30px sans";
-		context.fillText("Hello World", textX, textY);
+		var sara = sprite({
+		context: context,
+		image: img,
+		width: 14,
+		height: 18
+		});
+
+		sara.draw();
+
+		// context.fillStyle = 'white';
+		// context.font = "30px sans";
+		// context.fillText("Hello World", textX, textY);
+	}
+
+	function sprite(params){
+		var sprite = {};
+		sprite.context = params.context;
+		sprite.image = params.image;
+		sprite.width = params.width;
+		sprite.height = params.height;
+
+		sprite.draw = function(){
+			sprite.context.drawImage(
+				sprite.image,
+				0,
+				0,
+				sprite.width,
+				sprite.height,
+				0,
+				0,
+				sprite.width,
+				sprite.height);
+		};
+
+		return sprite;
 	}
 
 	function nextFrame(){
