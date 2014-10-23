@@ -32,7 +32,6 @@ function gameLoop(img){
 		// The 'W' Key
 		if(e.keyCode || e.which == 119){
 			keyPresses.push("Up");
-			console.log("Up");
 		} 
 		// The 'A' Key
 		else if(e.keyCode || e.which == 97){
@@ -89,8 +88,21 @@ function gameLoop(img){
 		};
 
 		sprite.update = function(){
-			if(keyPresses.pop() == "Up"){
-				sprite.positionY -= 100;
+			switch (keyPresses.pop()){
+				case "Up":
+					sprite.positionY -= 10;
+					break;
+				case "Down":
+					sprite.positionY += 10;
+					break;
+				case "Left":
+					sprite.positionX -= 10;
+					break;
+				case "Right":
+					sprite.positionX += 10;
+					break;
+				default:
+					break;
 			}
 		};
 
