@@ -13,8 +13,16 @@ function gameLoop(img){
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
-	var textX = 1;
-	var textY = 30;
+	var sara = sprite({
+			context: context,
+			image: img,
+			width: 14,
+			height: 18,
+			positionX: 150,
+			positionY: 150
+	});;
+
+	var keyPresses = [];
 
 	function processInput(lastUpdated){
 		window.addEventListener("keypress", keyboardHandler);
@@ -23,39 +31,33 @@ function gameLoop(img){
 	function keyboardHandler(e){
 		// The 'W' Key
 		if(e.keyCode || e.which == 119){
-			textY -= 10;
+			keyPresses.push("Up");
+			console.log("Up");
 		} 
 		// The 'A' Key
 		else if(e.keyCode || e.which == 97){
-			textX -= 10;
+			keyPresses.push("Left");
 			console.log("Left");
 		}
 		// The 'S' Key
 		else if(e.keyCode || e.which == 115){
-			textY += 10;
+			keyPresses.push("Down");
 			console.log("Down");
 		}
 		// The 'D' Key
 		else if(e.keyCode || e.which == 100){
-			textX += 10;
+			keyPresses.push("Right");
 			console.log("Right");
 		}
 	}
 
-	function update(){
-		//stub
+	function update(lastUpdated){
+		sara.update();
 	}
 
 	function render(){
 		context.fillStyle = "#000000";
 		context.fillRect(0, 0, 500, 500);
-
-		var sara = sprite({
-		context: context,
-		image: img,
-		width: 14,
-		height: 18
-		});
 
 		sara.draw();
 
@@ -70,6 +72,8 @@ function gameLoop(img){
 		sprite.image = params.image;
 		sprite.width = params.width;
 		sprite.height = params.height;
+		sprite.positionX = params.positionX;
+		sprite.positionY = params.positionY;
 
 		sprite.draw = function(){
 			sprite.context.drawImage(
@@ -78,10 +82,16 @@ function gameLoop(img){
 				0,
 				sprite.width,
 				sprite.height,
-				0,
-				0,
+				sprite.positionX,
+				sprite.positionY,
 				sprite.width,
 				sprite.height);
+		};
+
+		sprite.update = function(){
+			if(keyPresses.pop() == "Up"){
+				sprite.positionY -= 100;
+			}
 		};
 
 		return sprite;
