@@ -16,10 +16,12 @@ function gameLoop(img){
 	var sara = sprite({
 			context: context,
 			image: img,
-			width: 14,
+			width: 78,
 			height: 18,
 			positionX: 150,
-			positionY: 150
+			positionY: 150,
+			numberOfFrames: 5,
+			loop: true
 	});;
 
 	var keyPresses = [];
@@ -36,17 +38,14 @@ function gameLoop(img){
 		// The 'A' Key
 		else if(e.keyCode || e.which == 97){
 			keyPresses.push("Left");
-			console.log("Left");
 		}
 		// The 'S' Key
 		else if(e.keyCode || e.which == 115){
 			keyPresses.push("Down");
-			console.log("Down");
 		}
 		// The 'D' Key
 		else if(e.keyCode || e.which == 100){
 			keyPresses.push("Right");
-			console.log("Right");
 		}
 	}
 
@@ -59,31 +58,32 @@ function gameLoop(img){
 		context.fillRect(0, 0, 500, 500);
 
 		sara.draw();
-
-		// context.fillStyle = 'white';
-		// context.font = "30px sans";
-		// context.fillText("Hello World", textX, textY);
 	}
 
 	function sprite(params){
 		var sprite = {};
+		var frameIndex = 0;
+		var tickCount = 0;
+		var ticksPerFrame = ticksPerFrame || 0;
+		var numberOfFrames = params.numberOfFrames || 1;
 		sprite.context = params.context;
 		sprite.image = params.image;
 		sprite.width = params.width;
 		sprite.height = params.height;
 		sprite.positionX = params.positionX;
 		sprite.positionY = params.positionY;
+		sprite.loop = params.loop;
 
 		sprite.draw = function(){
 			sprite.context.drawImage(
 				sprite.image,
+				frameIndex * sprite.width / numberOfFrames,
 				0,
-				0,
-				sprite.width,
+				sprite.width / numberOfFrames,
 				sprite.height,
 				sprite.positionX,
 				sprite.positionY,
-				sprite.width,
+				sprite.width / numberOfFrames,
 				sprite.height);
 		};
 
@@ -92,12 +92,27 @@ function gameLoop(img){
 				case "Up":
 					sprite.positionY -= 10;
 					break;
-				case "Down":
-					sprite.positionY += 10;
-					break;
 				case "Left":
 					sprite.positionX -= 10;
 					break;
+
+				case "Down":
+					sprite.positionY += 10;
+
+					tickCount += 1;
+
+					if (tickCount > ticksPerFrame) {
+						tickCount = 0;
+
+						if(frameIndex < numberOfFrames - 1){
+							frameIndex += 1; 
+						} else if(sprite.loop){
+							frameIndex = 0;
+						}
+					}
+
+					break;
+					
 				case "Right":
 					sprite.positionX += 10;
 					break;
@@ -111,7 +126,6 @@ function gameLoop(img){
 
 	function nextFrame(){
 		var currentTime = new Date().getTime();
-		//console.log(currentTime);
 
 		processInput(currentTime - lastUpdate);
 		update(currentTime - lastUpdate);
