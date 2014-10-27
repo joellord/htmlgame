@@ -65,7 +65,7 @@ function gameLoop(img){
 		var sprite = {};
 		var frameIndex = 0;
 		var tickCount = 0;
-		var ticksPerFrame = ticksPerFrame || 0;
+		var ticksPerFrame = ticksPerFrame || 3;
 		var numberOfFrames = params.numberOfFrames || 1;
 		sprite.context = params.context;
 		sprite.image = params.image;
@@ -93,7 +93,7 @@ function gameLoop(img){
 				sprite.context.drawImage(
 					sprite.image,
 					frameIndex * sprite.width / numberOfFrames,
-					38,
+					36,
 					sprite.width / numberOfFrames,
 					sprite.height,
 					sprite.positionX,
@@ -131,6 +131,18 @@ function gameLoop(img){
 
 				case "Down":
 					sprite.positionY += 3;
+
+					tickCount += 1;
+
+					if (tickCount > ticksPerFrame) {
+						tickCount = 0;
+
+						if(frameIndex < numberOfFrames - 1){
+							frameIndex += 1; 
+						} else if(sprite.loop){
+							frameIndex = 0;
+						}
+					}
 
 					newDirection = "Down"
 
