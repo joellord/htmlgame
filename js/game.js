@@ -1,5 +1,5 @@
 function init(){
-	imageLoader("img/sara-simple.png", gameLoop)
+	imageLoader("img/sara.png", gameLoop)
 };
 
 
@@ -90,14 +90,7 @@ function gameLoop(img){
 		sprite.update = function(){
 			switch (keyPresses.pop()){
 				case "Up":
-					sprite.positionY -= 10;
-					break;
-				case "Left":
-					sprite.positionX -= 10;
-					break;
-
-				case "Down":
-					sprite.positionY += 10;
+					sprite.positionY -= 3;
 
 					tickCount += 1;
 
@@ -112,9 +105,17 @@ function gameLoop(img){
 					}
 
 					break;
-					
+				case "Left":
+					sprite.positionX -= 3;
+					break;
+
+				case "Down":
+					sprite.positionY += 3;
+
+					break;
+
 				case "Right":
-					sprite.positionX += 10;
+					sprite.positionX += 3;
 					break;
 				default:
 					break;
