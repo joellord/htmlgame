@@ -16,12 +16,13 @@ function gameLoop(img){
 	var sara = sprite({
 			context: context,
 			image: img,
-			width: 78,
+			width: 63,
 			height: 18,
 			positionX: 150,
 			positionY: 150,
-			numberOfFrames: 5,
-			loop: true
+			numberOfFrames: 4,
+			loop: true,
+			direction: "Up"
 	});;
 
 	var keyPresses = [];
@@ -73,18 +74,33 @@ function gameLoop(img){
 		sprite.positionX = params.positionX;
 		sprite.positionY = params.positionY;
 		sprite.loop = params.loop;
+		var newDirection = newDirection || params.direction; 
 
 		sprite.draw = function(){
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				0,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
+
+			if(newDirection == "Up"){
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					0,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			} else if(newDirection == "Down"){
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					38,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			}
 		};
 
 		sprite.update = function(){
@@ -104,18 +120,26 @@ function gameLoop(img){
 						}
 					}
 
+					newDirection = "Up"
+
 					break;
 				case "Left":
 					sprite.positionX -= 3;
+
+					newDirection ="Left"
 					break;
 
 				case "Down":
 					sprite.positionY += 3;
 
+					newDirection = "Down"
+
 					break;
 
 				case "Right":
 					sprite.positionX += 3;
+
+					newDirection = "Right"
 					break;
 				default:
 					break;
