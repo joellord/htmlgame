@@ -117,7 +117,7 @@ function gameLoop(img){
 			} else if(newDirection == "Right"){
 				numberOfFrames = 3;
 				sprite.width = 47;
-				
+
 				sprite.context.drawImage(
 					sprite.image,
 					frameIndex * sprite.width / numberOfFrames,
@@ -136,17 +136,7 @@ function gameLoop(img){
 				case "Up":
 					sprite.positionY -= 3;
 
-					tickCount += 1;
-
-					if (tickCount > ticksPerFrame) {
-						tickCount = 0;
-
-						if(frameIndex < numberOfFrames - 1){
-							frameIndex += 1; 
-						} else if(sprite.loop){
-							frameIndex = 0;
-						}
-					}
+					move();
 
 					newDirection = "Up"
 
@@ -154,17 +144,7 @@ function gameLoop(img){
 				case "Left":
 					sprite.positionX -= 3;
 
-					tickCount += 1;
-
-					if (tickCount > ticksPerFrame) {
-						tickCount = 0;
-
-						if(frameIndex < numberOfFrames - 1){
-							frameIndex += 1; 
-						} else if(sprite.loop){
-							frameIndex = 0;
-						}
-					}
+					move();
 
 					newDirection ="Left"
 					break;
@@ -172,17 +152,7 @@ function gameLoop(img){
 				case "Down":
 					sprite.positionY += 3;
 
-					tickCount += 1;
-
-					if (tickCount > ticksPerFrame) {
-						tickCount = 0;
-
-						if(frameIndex < numberOfFrames - 1){
-							frameIndex += 1; 
-						} else if(sprite.loop){
-							frameIndex = 0;
-						}
-					}
+					move();
 
 					newDirection = "Down"
 
@@ -191,22 +161,26 @@ function gameLoop(img){
 				case "Right":
 					sprite.positionX += 3;
 
-					tickCount += 1;
-
-					if (tickCount > ticksPerFrame) {
-						tickCount = 0;
-
-						if(frameIndex < numberOfFrames - 1){
-							frameIndex += 1; 
-						} else if(sprite.loop){
-							frameIndex = 0;
-						}
-					}
+					move();
 
 					newDirection = "Right"
 					break;
 				default:
 					break;
+			}
+		};
+
+		function move(){
+			tickCount += 1;
+
+			if (tickCount > ticksPerFrame) {
+				tickCount = 0;
+
+				if(frameIndex < numberOfFrames - 1){
+					frameIndex += 1; 
+				} else if(sprite.loop){
+					frameIndex = 0;
+				}
 			}
 		};
 
