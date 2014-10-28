@@ -115,6 +115,9 @@ function gameLoop(img){
 					sprite.width / numberOfFrames,
 					sprite.height);
 			} else if(newDirection == "Right"){
+				numberOfFrames = 3;
+				sprite.width = 47;
+				
 				sprite.context.drawImage(
 					sprite.image,
 					frameIndex * sprite.width / numberOfFrames,
