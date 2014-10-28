@@ -100,6 +100,31 @@ function gameLoop(img){
 					sprite.positionY,
 					sprite.width / numberOfFrames,
 					sprite.height);
+			} else if(newDirection == "Left"){
+				numberOfFrames = 3;
+				sprite.width = 47;
+
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					54,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			} else if(newDirection == "Right"){
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					18,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
 			}
 		};
 
@@ -126,6 +151,18 @@ function gameLoop(img){
 				case "Left":
 					sprite.positionX -= 3;
 
+					tickCount += 1;
+
+					if (tickCount > ticksPerFrame) {
+						tickCount = 0;
+
+						if(frameIndex < numberOfFrames - 1){
+							frameIndex += 1; 
+						} else if(sprite.loop){
+							frameIndex = 0;
+						}
+					}
+
 					newDirection ="Left"
 					break;
 
@@ -150,6 +187,18 @@ function gameLoop(img){
 
 				case "Right":
 					sprite.positionX += 3;
+
+					tickCount += 1;
+
+					if (tickCount > ticksPerFrame) {
+						tickCount = 0;
+
+						if(frameIndex < numberOfFrames - 1){
+							frameIndex += 1; 
+						} else if(sprite.loop){
+							frameIndex = 0;
+						}
+					}
 
 					newDirection = "Right"
 					break;
