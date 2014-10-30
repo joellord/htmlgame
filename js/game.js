@@ -201,16 +201,7 @@ function gameLoop(img){
 	requestAnimationFrame(nextFrame);
 }
 
-
-// ImageLoader should load all needed image files.
 function imageLoader(src, callback){
-	// Attempt to batch load images -- come back to this
-	/*var uploadedImages;
-
-	for(img = 0; img < imageUploader.length; img++){
-		var sheet = new Image();
-		sheet.src = src[img];
-	} */
 
 	var img = new Image();
 	img.src = src;
