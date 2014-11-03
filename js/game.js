@@ -1,10 +1,10 @@
 function init(){
-	imgAssets = ["img/sara.png"]
-	imageLoader(imgAssets, gameLoop)
+	imgAssets = ["img/sara.png", "img/grass-tiles.png"];
+	imageLoader(imgAssets, gameLoop);
 };
 
 
-function gameLoop(imgHash){
+function gameLoop(imgAssets){
 	canvas = document.getElementById("game");
 	context = canvas.getContext("2d");
 
@@ -16,7 +16,7 @@ function gameLoop(imgHash){
 
 	var sara = sprite({
 			context: context,
-			image: imgHash["img/sara.png"],
+			image: imgAssets["img/sara.png"],
 			width: 63,
 			height: 18,
 			positionX: 150,
@@ -58,6 +58,8 @@ function gameLoop(imgHash){
 	function render(){
 		context.fillStyle = "#000000";
 		context.fillRect(0, 0, 500, 500);
+
+		context.drawImage(imgAssets["img/grass-tiles.png"], 225, 225)
 
 		sara.draw();
 	}
@@ -194,22 +196,14 @@ function gameLoop(imgHash){
 }
 
 function imageLoader(src, callback){
-	var imgHash = {};
+	var imgAssets = {};
 
 	for(var i = 0; i < src.length; ++i){
 		var img = new Image();
 		img.src = src[i];
 
-		imgHash[String(src[i])] = img;
+		imgAssets[String(src[i])] = img;
 	}
 
-	callback(imgHash);
-
-	// var img = new Image();
-	// img.src = src;
-
-	// img.onload = function(){ 
-	// 	callback(img);
-	// }
-
+	callback(imgAssets);
 };
