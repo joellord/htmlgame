@@ -1,9 +1,10 @@
 function init(){
-	imageLoader("img/sara.png", gameLoop)
+	imgAssets = ["img/sara.png"]
+	imageLoader(imgAssets, gameLoop)
 };
 
 
-function gameLoop(img){
+function gameLoop(imgHash){
 	canvas = document.getElementById("game");
 	context = canvas.getContext("2d");
 
@@ -15,7 +16,7 @@ function gameLoop(img){
 
 	var sara = sprite({
 			context: context,
-			image: img,
+			image: imgHash["img/sara.png"],
 			width: 63,
 			height: 18,
 			positionX: 150,
@@ -135,34 +136,25 @@ function gameLoop(img){
 			switch (keyPresses.pop()){
 				case "Up":
 					sprite.positionY -= 3;
-
 					move();
-
 					newDirection = "Up"
 
 					break;
 				case "Left":
 					sprite.positionX -= 3;
-
 					move();
-
-					newDirection ="Left"
+					newDirection = "Left"
 					break;
 
 				case "Down":
 					sprite.positionY += 3;
-
 					move();
-
 					newDirection = "Down"
-
 					break;
 
 				case "Right":
 					sprite.positionX += 3;
-
 					move();
-
 					newDirection = "Right"
 					break;
 				default:
@@ -202,12 +194,22 @@ function gameLoop(img){
 }
 
 function imageLoader(src, callback){
+	var imgHash = {};
 
-	var img = new Image();
-	img.src = src;
+	for(var i = 0; i < src.length; ++i){
+		var img = new Image();
+		img.src = src[i];
 
-	img.onload = function(){ 
-		callback(img);
+		imgHash[String(src[i])] = img;
 	}
+
+	callback(imgHash);
+
+	// var img = new Image();
+	// img.src = src;
+
+	// img.onload = function(){ 
+	// 	callback(img);
+	// }
 
 };
