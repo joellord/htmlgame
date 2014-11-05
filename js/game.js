@@ -8,23 +8,62 @@ function gameLoop(imgAssets){
 	canvas = document.getElementById("game");
 	context = canvas.getContext("2d");
 
-	canvas.width = 500;
-	canvas.height = 500;
+	canvas.width = 480;
+	canvas.height = 480;
 
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
+	function background(params){
+		background.context = params.context;
+		background.image = params.image;
+		background.width = params.width;
+		background.height = params.height;
+
+		background.draw = function(){
+			var drawX = 0;
+			var drawY = 0;
+
+			while(drawX < canvas.width){
+				while(drawY < canvas.height){
+					background.context.drawImage(
+						background.image,
+						0,
+						0,
+						background.width,
+						background.height,
+						drawX,
+						drawY,
+						background.width,
+						background.height);
+					drawY += 15;
+				}
+				drawY = 0;
+				drawX+=15;
+			}
+		}
+
+		return background;
+	}
+
+	var bg = background({
+		context: context,
+		image: imgAssets["img/grass-tiles.png"],
+		width: 32,
+		height: 32
+	});
+
 	var sara = sprite({
-			context: context,
-			image: imgAssets["img/sara.png"],
-			width: 63,
-			height: 18,
-			positionX: 150,
-			positionY: 150,
-			numberOfFrames: 4,
-			loop: true,
-			direction: "Up"
-	});;
+		context: context,
+		image: imgAssets["img/sara.png"],
+		width: 63,
+		height: 18,
+		positionX: 150,
+		positionY: 150,
+		numberOfFrames: 4,
+		loop: true,
+		direction: "Up"
+	});
 
 	var keyPresses = [];
 
@@ -56,12 +95,7 @@ function gameLoop(imgAssets){
 	}
 
 	function render(){
-		var pattern = context.createPattern(imgAssets["img/grass-tiles.png"], 'repeat');
-
-		context.rect(0, 0, canvas.width, canvas.height);
-		context.fillStyle = pattern;
-		context.fill();
-
+		bg.draw();
 		sara.draw();
 	}
 

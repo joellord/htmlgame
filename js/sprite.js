@@ -14,7 +14,6 @@ function sprite(params){
 	var newDirection = newDirection || params.direction; 
 
 	sprite.draw = function(){
-
 		if(newDirection == "Up"){
 			sprite.context.drawImage(
 				sprite.image,
