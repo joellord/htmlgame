@@ -56,10 +56,11 @@ function gameLoop(imgAssets){
 	}
 
 	function render(){
-		context.fillStyle = "#000000";
-		context.fillRect(0, 0, 500, 500);
+		var pattern = context.createPattern(imgAssets["img/grass-tiles.png"], 'repeat');
 
-		context.drawImage(imgAssets["img/grass-tiles.png"], 225, 225)
+		context.rect(0, 0, canvas.width, canvas.height);
+		context.fillStyle = pattern;
+		context.fill();
 
 		sara.draw();
 	}
