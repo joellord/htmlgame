@@ -14,60 +14,88 @@ function sprite(params){
 	var newDirection = newDirection || params.direction; 
 
 	sprite.draw = function(){
-		if(newDirection == "Up"){
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				0,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Down"){
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				36,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Left"){
-			numberOfFrames = 3;
-			sprite.width = 47;
-
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				54,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Right"){
-			numberOfFrames = 3;
-			sprite.width = 47;
-
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				18,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		}
+		//do another dance
 	};
 
 	sprite.update = function(keyPresses){
+		//do a dance
+	};
+
+	function move(){
+		tickCount += 1;
+
+		if (tickCount > ticksPerFrame) {
+			tickCount = 0;
+
+			if(frameIndex < numberOfFrames - 1){
+				frameIndex += 1; 
+			} else if(sprite.loop){
+				frameIndex = 0;
+			}
+		}
+	};
+
+	return sprite;
+}
+
+function heroine(params){
+	sprite.call(this, params)
+
+	heroine.draw = function(){
+		if(newDirection == "Up"){
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					0,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			} else if(newDirection == "Down"){
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					36,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			} else if(newDirection == "Left"){
+				numberOfFrames = 3;
+				sprite.width = 47;
+
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					54,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			} else if(newDirection == "Right"){
+				numberOfFrames = 3;
+				sprite.width = 47;
+
+				sprite.context.drawImage(
+					sprite.image,
+					frameIndex * sprite.width / numberOfFrames,
+					18,
+					sprite.width / numberOfFrames,
+					sprite.height,
+					sprite.positionX,
+					sprite.positionY,
+					sprite.width / numberOfFrames,
+					sprite.height);
+			}
+		}
+
+	heroine.update = function(keyPresses){
 		switch (keyPresses.pop()){
 			case "Up":
 				sprite.positionY -= 3;
@@ -95,21 +123,7 @@ function sprite(params){
 			default:
 				break;
 		}
-	};
+	}
 
-	function move(){
-		tickCount += 1;
-
-		if (tickCount > ticksPerFrame) {
-			tickCount = 0;
-
-			if(frameIndex < numberOfFrames - 1){
-				frameIndex += 1; 
-			} else if(sprite.loop){
-				frameIndex = 0;
-			}
-		}
-	};
-
-	return sprite;
+	return heroine;
 }
