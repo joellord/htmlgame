@@ -1,8 +1,4 @@
 function sprite(params){
-	var frameIndex = 0;
-	var tickCount = 0;
-	var ticksPerFrame = ticksPerFrame || 3;
-	var numberOfFrames = params.numberOfFrames || 1;
 	this.context = params.context;
 	this.image = params.image;
 	this.width = params.width;
@@ -14,56 +10,63 @@ function sprite(params){
 
 }
 
+sprite.prototype.frameIndex = 0;
+sprite.prototype.tickCount = 0;
+
+//Fix me
+sprite.prototype.ticksPerFrame = 3;
+sprite.prototype.numberOfFrames = 4;
+
 sprite.prototype.draw = function(){
 	if(this.direction == "Up"){
 		this.context.drawImage(
 			this.image,
-			frameIndex * sprite.width / numberOfFrames,
+			this.frameIndex * this.width / this.numberOfFrames,
 			0,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height,
 			this.positionX,
 			this.positionY,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height);
 	} else if(direction == "Down"){
 		this.context.drawImage(
 			this.image,
-			frameIndex * this.width / numberOfFrames,
+			this.frameIndex * this.width / this.numberOfFrames,
 			36,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height,
 			this.positionX,
 			this.positionY,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height);
 	} else if(direction == "Left"){
-		numberOfFrames = 3;
+		this.this.numberOfFrames = 3;
 		this.width = 47;
 
 		this.context.drawImage(
 			this.image,
-			frameIndex * this.width / numberOfFrames,
+			this.frameIndex * this.width / this.numberOfFrames,
 			54,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height,
 			this.positionX,
 			this.positionY,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height);
 	} else if(direction == "Right"){
-		numberOfFrames = 3;
+		this.numberOfFrames = 3;
 		this.width = 47;
 
 		this.context.drawImage(
 			this.image,
-			frameIndex * this.width / numberOfFrames,
+			this.frameIndex * this.width / this.numberOfFrames,
 			18,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height,
 			this.positionX,
 			this.positionY,
-			this.width / numberOfFrames,
+			this.width / this.numberOfFrames,
 			this.height);
 	}
 };
@@ -99,15 +102,15 @@ sprite.prototype.update = function(keyPresses){
 };
 
 function move(){
-	tickCount += 1;
+	this.tickCount += 1;
 
-	if (tickCount > ticksPerFrame) {
-		tickCount = 0;
+	if (this.tickCount > this.ticksPerFrame) {
+		this.tickCount = 0;
 
-		if(frameIndex < numberOfFrames - 1){
-			frameIndex += 1; 
-		} else if(sprite.loop){
-			frameIndex = 0;
+		if(this.frameIndex < this.numberOfFrames - 1){
+			this.frameIndex += 1; 
+		} else if(this.loop){
+			this.frameIndex = 0;
 		}
 	}
 };
