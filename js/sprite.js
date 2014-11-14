@@ -1,115 +1,113 @@
 function sprite(params){
-	var sprite = {};
 	var frameIndex = 0;
 	var tickCount = 0;
 	var ticksPerFrame = ticksPerFrame || 3;
 	var numberOfFrames = params.numberOfFrames || 1;
-	sprite.context = params.context;
-	sprite.image = params.image;
-	sprite.width = params.width;
-	sprite.height = params.height;
-	sprite.positionX = params.positionX;
-	sprite.positionY = params.positionY;
-	sprite.loop = params.loop;
-	var newDirection = newDirection || params.direction; 
+	this.context = params.context;
+	this.image = params.image;
+	this.width = params.width;
+	this.height = params.height;
+	this.positionX = params.positionX;
+	this.positionY = params.positionY;
+	this.loop = params.loop;
+	this.direction = params.direction; 
 
-	sprite.draw = function(){
-		if(newDirection == "Up"){
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				0,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Down"){
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				36,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Left"){
-			numberOfFrames = 3;
-			sprite.width = 47;
-
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				54,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		} else if(newDirection == "Right"){
-			numberOfFrames = 3;
-			sprite.width = 47;
-
-			sprite.context.drawImage(
-				sprite.image,
-				frameIndex * sprite.width / numberOfFrames,
-				18,
-				sprite.width / numberOfFrames,
-				sprite.height,
-				sprite.positionX,
-				sprite.positionY,
-				sprite.width / numberOfFrames,
-				sprite.height);
-		}
-	};
-
-	sprite.update = function(keyPresses){
-		switch (keyPresses.pop()){
-			case "Up":
-				sprite.positionY -= 3;
-				move();
-				newDirection = "Up"
-
-				break;
-			case "Left":
-				sprite.positionX -= 3;
-				move();
-				newDirection = "Left"
-				break;
-
-			case "Down":
-				sprite.positionY += 3;
-				move();
-				newDirection = "Down"
-				break;
-
-			case "Right":
-				sprite.positionX += 3;
-				move();
-				newDirection = "Right"
-				break;
-			default:
-				break;
-		}
-	};
-
-	function move(){
-		tickCount += 1;
-
-		if (tickCount > ticksPerFrame) {
-			tickCount = 0;
-
-			if(frameIndex < numberOfFrames - 1){
-				frameIndex += 1; 
-			} else if(sprite.loop){
-				frameIndex = 0;
-			}
-		}
-	};
-
-	return sprite;
 }
+
+sprite.prototype.draw = function(){
+	if(this.direction == "Up"){
+		this.context.drawImage(
+			this.image,
+			frameIndex * sprite.width / numberOfFrames,
+			0,
+			this.width / numberOfFrames,
+			this.height,
+			this.positionX,
+			this.positionY,
+			this.width / numberOfFrames,
+			this.height);
+	} else if(direction == "Down"){
+		this.context.drawImage(
+			this.image,
+			frameIndex * this.width / numberOfFrames,
+			36,
+			this.width / numberOfFrames,
+			this.height,
+			this.positionX,
+			this.positionY,
+			this.width / numberOfFrames,
+			this.height);
+	} else if(direction == "Left"){
+		numberOfFrames = 3;
+		this.width = 47;
+
+		this.context.drawImage(
+			this.image,
+			frameIndex * this.width / numberOfFrames,
+			54,
+			this.width / numberOfFrames,
+			this.height,
+			this.positionX,
+			this.positionY,
+			this.width / numberOfFrames,
+			this.height);
+	} else if(direction == "Right"){
+		numberOfFrames = 3;
+		this.width = 47;
+
+		this.context.drawImage(
+			this.image,
+			frameIndex * this.width / numberOfFrames,
+			18,
+			this.width / numberOfFrames,
+			this.height,
+			this.positionX,
+			this.positionY,
+			this.width / numberOfFrames,
+			this.height);
+	}
+};
+
+sprite.prototype.update = function(keyPresses){
+	switch (keyPresses.pop()){
+		case "Up":
+			this.positionY -= 3;
+			move();
+			newDirection = "Up"
+
+			break;
+		case "Left":
+			this.positionX -= 3;
+			move();
+			newDirection = "Left"
+			break;
+
+		case "Down":
+			this.positionY += 3;
+			move();
+			newDirection = "Down"
+			break;
+
+		case "Right":
+			this.positionX += 3;
+			move();
+			newDirection = "Right"
+			break;
+		default:
+			break;
+	}
+};
+
+function move(){
+	tickCount += 1;
+
+	if (tickCount > ticksPerFrame) {
+		tickCount = 0;
+
+		if(frameIndex < numberOfFrames - 1){
+			frameIndex += 1; 
+		} else if(sprite.loop){
+			frameIndex = 0;
+		}
+	}
+};

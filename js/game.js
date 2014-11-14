@@ -53,7 +53,7 @@ function gameLoop(imgAssets){
 		height: 32
 	});
 
-	var sara = sprite({
+	var sara = new sprite({
 		context: context,
 		image: imgAssets["img/sara.png"],
 		width: 63,
