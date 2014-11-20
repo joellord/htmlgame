@@ -11,16 +11,21 @@ function sprite(params){
 };
 
 sprite.prototype.draw = function(context) {
-	var frameIndex;
+	var sheetY = 0;
+	if(this.direction == "Right" || this.direction == "Left"){
+		this.numberOfFrames = 3;
+		this.width = 47;
+		sheetY = 54;
+	}
 
 	context.drawImage(this.image,
 						0,
-						0,
-						this.width,
+						sheetY,
+						this.width / this.numberOfFrames,
 						this.height,
 						this.positionX,
 						this.positionY,
-						this.width,
+						this.width / this.numberOfFrames,
 						this.height);
 };
 
