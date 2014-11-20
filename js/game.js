@@ -14,7 +14,7 @@ function gameLoop(imgAssets){
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
-	var bg = background({
+	var bg = new background({
 		context: context,
 		image: imgAssets["img/grass-tiles.png"],
 		width: 32,
