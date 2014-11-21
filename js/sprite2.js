@@ -4,6 +4,7 @@ function sprite(params){
 	this.height = params.height;
 	this.loop = params.loop;
 	this.numberOfFrames = params.numberOfFrames;
+	this.frameIndex = 0;
 	this.direction = params.direction;
 	this.positionX = params.positionX;
 	this.positionY = params.positionY;
@@ -12,6 +13,7 @@ function sprite(params){
 
 sprite.prototype.draw = function(context) {
 	var sheetY = 0;
+
 	if(this.direction == "Left"){
 		this.numberOfFrames = 3;
 		this.width = 47;
@@ -25,10 +27,16 @@ sprite.prototype.draw = function(context) {
 
 	}
 
+	if(this.frameIndex < this.numberOfFrames - 1){
+		this.frameIndex += 1;
+	} else if(this.loop){
+		this.frameIndex = 0;
+	}
+
 	context.drawImage(this.image,
-						0,
+						this.frameIndex * this.width / this.numberOfFrames,
 						sheetY,
-						this.width / this.numberOfFrames,
+						this.width/ this.numberOfFrames,
 						this.height,
 						this.positionX,
 						this.positionY,
