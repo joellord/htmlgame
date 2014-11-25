@@ -65,6 +65,7 @@ sprite.prototype.update = function(keyPresses){
 			this.moving = true;
 		break;
 		default:
+			this.moving = false;
 		break;
 	}
 }
