@@ -11,6 +11,8 @@ function gameLoop(imgAssets){
 	canvas.width = 480;
 	canvas.height = 480;
 
+	heroine.prototype = Object.create(sprite.prototype);
+
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();
 
@@ -21,7 +23,7 @@ function gameLoop(imgAssets){
 		height: 32
 	});
 
-	var sara = new sprite({
+	var sara = new heroine({
 		image: imgAssets["img/sara.png"],
 		width: 63,
 		height: 18,
