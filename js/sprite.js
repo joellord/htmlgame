@@ -48,4 +48,5 @@ sprite.prototype.draw = function(context) {
 
 sprite.prototype.update = function(){
 	//soon
+	console.log("Here")
 }
