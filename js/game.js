@@ -12,7 +12,7 @@ function gameLoop(imgAssets){
 	canvas.height = 480;
 
 	heroine.prototype = Object.create(sprite.prototype);
-	//heroine.prototype.constructor = heroine;
+	heroine.prototype.constructor = heroine;
 
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 	var lastUpdate = new Date().getTime();

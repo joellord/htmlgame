@@ -2,7 +2,7 @@ function heroine(params){
 	sprite.call(this, params);
 };
 
-heroine.update = function(keyPresses){
+heroine.prototype.update = function(keyPresses){
 
 	switch(keyPresses.pop()){
 		case "Up":
@@ -31,5 +31,4 @@ heroine.update = function(keyPresses){
 	}
 
 	console.log("Not Here")
-	sprite.prototype.update.call();
 }
