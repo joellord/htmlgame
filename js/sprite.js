@@ -46,7 +46,7 @@ sprite.prototype.draw = function(context) {
 						this.height);
 };
 
-sprite.prototype.update = function(){
+sprite.prototype.update = function(keyPresses){
 	//soon
 	console.log("Here")
 }
