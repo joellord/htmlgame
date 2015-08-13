@@ -2,6 +2,10 @@ function heroine(params){
 	sprite.call(this, params);
 };
 
+// heroine extends sprite
+heroine.prototype = sprite.prototype;
+heroine.prototype.constructor = heroine;
+
 heroine.prototype.update = function(keyPresses){
 
 	switch(keyPresses.pop()){
